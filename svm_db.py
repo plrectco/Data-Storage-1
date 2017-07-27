@@ -31,32 +31,32 @@ sess = tf.Session()
 # read 2 columns as feature, 2d is easier for visualizing
 # read the fifth column
 # only two classes classification
-localfn='iris.csv'
-x_vals = np.genfromtxt(localfn,delimiter=',',usecols=(0,3)).astype(np.float32) 
-y_iris = np.genfromtxt(localfn,delimiter=',',usecols=(4),dtype=str)
+# localfn='iris.csv'
+# x_vals = np.genfromtxt(localfn,delimiter=',',usecols=(0,3)).astype(np.float32) 
+# y_iris = np.genfromtxt(localfn,delimiter=',',usecols=(4),dtype=str)
 
 # read from database
-# xsql="select petal_length, sepal_width from flower"
-# ysql = "select category from flower"
-# conn= MySQLdb.connect(
-#         host='localhost',
-#         port = 3306,
-#         user='root',
-#         passwd='oxy',
-#         db ='iris',
-#         )
-# cur = conn.cursor()
-# try:
-#     xfetch = cur.fetchmany(cur.execute(xsql))
-#     yfetch = cur.fetchmany(cur.execute(ysql))
-#     x_vals = np.array(xfetch).astype(np.float32)
-#     y_iris = np.array(yfetch)
-#     conn.commit()
-# except:
-#     conn.rollback()
-#     print("Error when reading from the database")
-# cur.close()
-# conn.close()
+xsql="select petal_length, sepal_width from flower"
+ysql = "select category from flower"
+conn= MySQLdb.connect(
+        host='localhost',
+        port = 3306,
+        user='root',
+        passwd='123',
+        db ='iris',
+        )
+cur = conn.cursor()
+try:
+    xfetch = cur.fetchmany(cur.execute(xsql))
+    yfetch = cur.fetchmany(cur.execute(ysql))
+    x_vals = np.array(xfetch).astype(np.float32)
+    y_iris = np.array(yfetch)
+    conn.commit()
+except:
+    conn.rollback()
+    print("Error when reading from the database")
+cur.close()
+conn.close()
 
 
 
